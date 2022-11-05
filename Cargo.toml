@@ -2,11 +2,10 @@
 name = "le-saviez-vous"
 version = "1.0.0"
 edition = "2021"
-authors = "AdrienGras"
+authors = ["AdrienGras", "arnaudfranswa"]
 readme = "README.md"
 repository = "https://github.com/AdrienGras/le-saviez-vous-generator"
 license = "MIT"
-license-file = "LICENSE"
 publish = false
 
 [dependencies]
