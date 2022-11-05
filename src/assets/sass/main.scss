@@ -1,0 +1,14 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+    color: lightgrey;
+}
+
+/** Utils **/
+.min-vh-95 {
+    min-height: 90vh!important;
+}
+
+.min-vh-5 {
+    min-height: 10vh!important;
+}

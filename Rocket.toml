@@ -1,0 +1,5 @@
+[global]
+address = "0.0.0.0"
+template_dir = "src/templates"
+sass_dir = "src/assets/sass"
+css_dir = "src/assets/css"
