@@ -10,11 +10,11 @@ fn get_connection() -> SqliteConnection {
 }
 
 pub fn count_all() -> i64 {
-    let mut db: SqliteConnection = get_connection();
+    let db: &mut SqliteConnection = &mut get_connection();
 
     quote_subject
     .count()
-    .get_result::<i64>(&mut db)
+    .get_result::<i64>(db)
     .unwrap()
 }
 

@@ -6,27 +6,37 @@ use crate::models::{QuoteSubject, QuoteVerb, QuoteDescription};
 use std::str;
 
 pub fn generate() -> QuoteDTO {
+    let mut rng = rand::thread_rng();
+
+    let rnd_subject_id = rng.gen_range(1..quote_subjects::count_all());
+    let rnd_verb_id = rng.gen_range(1..quote_verbs::count_all());
+    let rnd_description_id = rng.gen_range(1..quote_descriptions::count_all());
+
+    let is_plural = rng.gen_range(1..2) > 2;
+
+    build_from_ids(
+        rnd_subject_id.try_into().unwrap(), 
+        rnd_verb_id.try_into().unwrap(), 
+        rnd_description_id.try_into().unwrap(), 
+        is_plural
+    )
+}
+
+pub fn generate_from_hash(hash: String) -> QuoteDTO {
+    let (subject_id, verb_id, description_id, is_plural) = decipher_hash(hash);
+
+    build_from_ids(subject_id, verb_id, description_id, is_plural)
+}
+
+fn build_from_ids(subject_id: i32, verb_id: i32, description_id: i32, is_plural: bool) -> QuoteDTO {
     let subject: String = String::new();
     let verb: String = String::new();
     let description: String = String::new();
 
-    let mut rng = rand::thread_rng();
+    let quote_subject_obj = quote_subjects::find(subject_id.into());
+    let quote_verb_obj = quote_verbs::find(verb_id.into());
+    let quote_description_obj = quote_descriptions::find(description_id.into());
 
-    let count_subjects: i64 = quote_subjects::count_all();
-    let count_verbs: i64 = quote_verbs::count_all();
-    let count_descriptions: i64 = quote_descriptions::count_all();
-
-    let rnd_subject_id = rng.gen_range(1..count_subjects);
-    let rnd_verb_id = rng.gen_range(1..count_verbs);
-    let rnd_description_id = rng.gen_range(1..count_verbs);
-
-    let quote_subject_obj = quote_subjects::find(rnd_subject_id);
-    let quote_verb_obj = quote_verbs::find(rnd_verb_id);
-    let quote_description_obj = quote_descriptions::find(rnd_description_id);
-
-    let is_plural = rng.gen_range(1..2) > 2;
-
-    // generate subject
     if is_plural {
         subject = quote_subject_obj.quote_plural;
         verb = quote_verb_obj.quote_plural;
