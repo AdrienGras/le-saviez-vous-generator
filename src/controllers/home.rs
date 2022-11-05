@@ -1,12 +1,11 @@
 use rocket_dyn_templates::{Template, context};
-
+use crate::middlewares::quotes;
 
 #[get("/")]
 pub fn index() -> Template {
-    Template::render("pages/home/index", context! {
-        hash: "abc",
-        quote: "Le camembert a été inventé en 1953 par Jean-Roger Camembert"
-    })
+    let quote = quotes::generate();
+
+    Template::render("pages/home/index", context! {quote})
 }
 
 #[get("/h/<hash>")]
