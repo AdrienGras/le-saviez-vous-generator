@@ -1,13 +1,13 @@
-use rocket::local::blocking::Client;
-use crate::{rocket_builder, controllers::home};
-use rocket::http::Status;
+#[allow(unused_imports)]
+use rocket::{http::Status, local::blocking::Client};
+#[allow(unused_imports)]
+use crate::{rocket_builder, controllers::home, tests::client_generator};
 
 #[cfg(test)]
 
 #[test]
 fn test_index() {
-    let rocket = rocket_builder::build();
-    let client = Client::tracked(rocket).unwrap();
+    let client: Client = client_generator::generate_client();
     let response = client.get(uri!(home::index)).dispatch();
     assert_eq!(response.status(), Status::Ok);
 }
