@@ -18,3 +18,8 @@ pub fn with_hash(hash: &str) -> Template {
         quote
     })
 }
+
+#[get("/about")]
+pub fn about() -> Template {
+    Template::render("pages/home/about", context! {})
+}

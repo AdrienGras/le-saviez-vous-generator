@@ -8,11 +8,11 @@ use std::str;
 pub fn generate() -> QuoteDTO {
     let mut rng = rand::thread_rng();
 
-    let rnd_subject_id = rng.gen_range(1..quote_subjects::count_all());
-    let rnd_verb_id = rng.gen_range(1..quote_verbs::count_all());
-    let rnd_description_id = rng.gen_range(1..quote_descriptions::count_all());
+    let rnd_subject_id = rng.gen_range(0..quote_subjects::count_all())+1;
+    let rnd_verb_id = rng.gen_range(0..quote_verbs::count_all())+1;
+    let rnd_description_id = rng.gen_range(0..quote_descriptions::count_all())+1;
 
-    let is_plural = rng.gen_range(1..2) > 2;
+    let is_plural = rng.gen_range(1..=2) > 1;
 
     build_from_ids(
         rnd_subject_id.try_into().unwrap(), 
@@ -29,22 +29,22 @@ pub fn generate_from_hash(hash: String) -> QuoteDTO {
 }
 
 fn build_from_ids(subject_id: i32, verb_id: i32, description_id: i32, is_plural: bool) -> QuoteDTO {
-    let subject: String = String::new();
-    let verb: String = String::new();
-    let description: String = String::new();
+    let subject: String;
+    let verb: String;
+    let description: String;
 
-    let quote_subject_obj = quote_subjects::find(subject_id.into());
-    let quote_verb_obj = quote_verbs::find(verb_id.into());
-    let quote_description_obj = quote_descriptions::find(description_id.into());
+    let quote_subject_obj = &quote_subjects::find(subject_id.into());
+    let quote_verb_obj = &quote_verbs::find(verb_id.into());
+    let quote_description_obj = &quote_descriptions::find(description_id.into());
 
     if is_plural {
-        subject = quote_subject_obj.quote_plural;
-        verb = quote_verb_obj.quote_plural;
-        description = quote_description_obj.quote_plural;
+        subject = quote_subject_obj.quote_plural.to_owned();
+        verb = quote_verb_obj.quote_plural.to_owned();
+        description = quote_description_obj.quote_plural.to_owned();
     } else {
-        subject = quote_subject_obj.quote_singular;
-        verb = quote_verb_obj.quote_singular;
-        description = quote_description_obj.quote_singular;
+        subject = quote_subject_obj.quote_singular.to_owned();
+        verb = quote_verb_obj.quote_singular.to_owned();
+        description = quote_description_obj.quote_singular.to_owned();
     }
 
     let complete_quote: String = format!("{} {} {}", subject, verb, description);
@@ -60,7 +60,7 @@ fn build_from_ids(subject_id: i32, verb_id: i32, description_id: i32, is_plural:
     }
 }
 
-fn generate_hash(subject: QuoteSubject, verb: QuoteVerb, description: QuoteDescription, is_plural: bool) -> String {
+fn generate_hash(subject: &QuoteSubject, verb: &QuoteVerb, description: &QuoteDescription, is_plural: bool) -> String {
     let clear_hash: String = format!("{}:{}:{}:{}", subject.id, verb.id, description.id, is_plural);
 
     encode(clear_hash)

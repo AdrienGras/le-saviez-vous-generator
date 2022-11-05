@@ -1,21 +1,19 @@
 {% macro quote(quote, hash) %}
-<div class="d-flex flex-column min-vh-95 justify-content-center align-items-center px-2">
-    <h1>Le saviez-vous ?</h1>
-    <p class="text-center">{{ quote }}</p>
+<h1 class="text-light mb-4">Le saviez-vous ?</h1>
+<p class="text-center text-light">{{ quote }}</p>
 
-    <div class="d-flex flex-row">
-        <a class="btn btn-primary mx-1" onclick="reload();">
-            <i class="fa-solid fa-arrows-rotate"></i>
-            <span>Une autre !</span>
-        </a>
-        <a class="btn btn-success mx-1" onclick='copy_hash_to_clipboard("{{hash}}");'>
-            <i class="fa-solid fa-floppy-disk"></i>
-            <span>Sauvegarder</span>
-        </a>
-    </div>
+<div class="d-flex flex-row">
+    <a class="btn btn-primary mx-1" onclick="reload();">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>Une autre !</span>
+    </a>
+    <a class="btn btn-success mx-1" onclick='copy_hash_to_clipboard("{{hash}}");'>
+        <i class="fa-solid fa-floppy-disk"></i>
+        <span>Sauvegarder</span>
+    </a>
+</div>
 
-    <div class="d-flex flex-row invisible py-2" id="copypaste-confirm">
-        <p class="text-muted">Copié dans le presse-papier !</p>
-    </div>
+<div class="d-flex flex-row invisible py-2" id="copypaste-confirm">
+    <p class="text-muted">Copié dans le presse-papier !</p>
 </div>
 {% endmacro quote %}

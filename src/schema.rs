@@ -2,7 +2,7 @@
 
 diesel::table! {
     quote_description (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         quote_singular -> Text,
         quote_plural -> Text,
     }
@@ -10,7 +10,7 @@ diesel::table! {
 
 diesel::table! {
     quote_subject (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         quote_singular -> Text,
         quote_plural -> Text,
     }
@@ -18,7 +18,7 @@ diesel::table! {
 
 diesel::table! {
     quote_verb (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         quote_singular -> Text,
         quote_plural -> Text,
     }

@@ -1,4 +1,4 @@
-FROM rust:slim-buster as builder
+FROM rust:slim-bullseye as builder
 
 # setting up working dir
 WORKDIR /var/www
@@ -7,9 +7,6 @@ WORKDIR /var/www
 RUN apt-get update && \
     apt-get install -y sqlite3 libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
-
-# installing dependencies
-RUN cargo install --path .
 
 # installing diesel cli tools
 RUN cargo install diesel_cli --no-default-features --features sqlite

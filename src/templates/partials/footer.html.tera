@@ -1,3 +1,6 @@
-<div class="d-flex flex-column min-vh-5 justify-content-center align-items-center">
-    <p class="">Powered by Rust 🦀 + Rocket 🚀 + Tera 🔗</p>
-</div>
+<span class="text-light text-muted">Powered by Rust 🦀 + Rocket 🚀 + Tera 🔗</span>
+<span class="">
+    <a class="link text-light text-muted" href="/about">
+        A propos
+    </a>
+</span>

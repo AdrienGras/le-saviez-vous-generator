@@ -21,8 +21,10 @@ pub fn count_all() -> i64 {
 pub fn find(object_id: i64) -> QuoteSubject {
     let db: &mut SqliteConnection = &mut get_connection();
 
+    let clear_id: i32 = object_id.try_into().unwrap();
+
     quote_subject
-    .filter(id.eq(object_id.into()))
+    .filter(id.eq(clear_id))
     .first(db)
     .unwrap()
 }

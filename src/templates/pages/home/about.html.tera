@@ -1,0 +1,21 @@
+{% extends "base" %}
+
+{% import "macros/quote" as m_quote %}
+
+{% block body %}
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center px-2 text-light text-center">
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center px-2 text-light text-center">
+    <h1 class="mb-4">A propos</h1>
+    <p>
+        Cette application est en même temps un proof-of-concept sur Rust, Rocket et Tera, et la réalisation du délire de quelques potes avec des idées stupides.
+    </p>
+    <p>
+        Aucune des informations diffusés par cette application ne serait être vrai, et donc elles ne doivent être pris que pour uniquement ce qu'elles sont : de mauvaises blagues.
+    </p>
+    <p>
+        <a class="link text-light text-muted" href="/">
+            Retour
+        </a>
+    </p>
+</div>
+{% endblock %}
